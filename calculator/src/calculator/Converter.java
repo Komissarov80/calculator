@@ -1,8 +1,12 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Converter {
-String number1, number2;
-char operator;
+String number1, number2, resultRome="";
+char operator, convertingNum;
+
 int numberInt1, numberInt2, result, count1 = 0, count2 = 0;
 
 	public Converter (String number1, char operator, String number2) throws Exception {
@@ -34,7 +38,7 @@ int numberInt1, numberInt2, result, count1 = 0, count2 = 0;
 	   case "VIII" : numberInt1 = 8;
 	   count1++;
 	   break;
-	   case "XI" : numberInt1 = 9;
+	   case "IX" : numberInt1 = 9;
 	   count1++;
 	   break;
 	   case "X" : numberInt1 = 10;
@@ -66,7 +70,7 @@ int numberInt1, numberInt2, result, count1 = 0, count2 = 0;
 	   case "VIII" : numberInt2 = 8;
 	   count2++;
 	   break;
-	   case "XI" : numberInt2 = 9;
+	   case "IX" : numberInt2 = 9;
 	   count2++;
 	   break;
 	   case "X" : numberInt2 = 10;
@@ -86,10 +90,93 @@ int numberInt1, numberInt2, result, count1 = 0, count2 = 0;
 	   break;
 	   case '/' : result = numberInt1 / numberInt2;
 	   }
-	   System.out.println(result);
+	   //Результат вычисления (result) записываем в массив char
+	   String s = Integer.toString(result);
+	   char [] listOfNumbers = new char[s.length()];
+	   listOfNumbers = ("" + result).toCharArray();
+	   
+	   //Если количество элементов в массиве 3, то результат сложения = 100
+	   if (s.length() == 3) {
+		   resultRome = "C";
+	   }
+	   
+	   // Если количество элементов в массиве 1, то это число до 10
+	   if (s.length() == 1) {
+		   switch(result){
+		   case 1 :  resultRome = "I";
+		   break;
+		   case 2 : resultRome = "II";
+		   break;
+		   case 3 : resultRome = "III";
+		   break;
+		   case 4 : resultRome = "IV";
+		   break;
+		   case 5 : resultRome = "V";
+		   break;
+		   case 6: resultRome = "VI";
+		   break;
+		   case 7 : resultRome = "VII";
+		   break;
+		   case 8 : resultRome = "VIII";
+		   break;
+		   case 9 : resultRome = "IX";
+		   break;
+		   case 0 : resultRome = "0";
+		   break;
+		   }
+	   }
+	   
+	   //Если элементов в массиве 2
+	   if (s.length() == 2) {
+	     // Определяем первое и второе число	   
+		  String num1 = Character.toString(listOfNumbers[0]), num2 = Character.toString(listOfNumbers[1]);
+		  String first = "", second = "";
+		  switch (num1) {
+		  case "1" : first = "X";
+		  break;
+		  case "2" : first = "XX";
+		  break;
+		  case "3" : first = "XXX";
+		  break;
+		  case "4" : first = "XL";
+		  break;
+		  case "5" : first = "L";
+		  break;
+		  case "6" : first = "LX";
+		  break;
+		  case "7" : first = "LXX";
+		  break;
+		  case "8" : first = "LXXX";
+		  break;
+		  case "9" : first = "XC";
+		  break;
+		  }
+		  switch (num2) {
+		  case "1" : second = "I";
+		  break;
+		  case "2" : second = "II";
+		  break;
+		  case "3" : second = "III";
+		  break;
+		  case "4" : second = "IV";
+		  break;
+		  case "5" : second = "V";
+		  break;
+		  case "6" : second = "VI";
+		  break;
+		  case "7" : second = "VII";
+		  break;
+		  case "8" : second = "VIII";
+		  break;
+		  case "9" : second = "IX";
+		  break;
+		  
+	   }
+	
+	   resultRome = resultRome + first + second;
 	}
 
+	   System.out.println(resultRome);
 
-
-	
+	}	
 }
